@@ -1314,9 +1314,8 @@
     }
     function relancer() {
       if (minuteur) { clearTimeout(minuteur); minuteur = null; }
-      if (reduitCar) return;
-      var delai = 7000;
-      if (vid && dias[cur].contains(vid)) delai = Math.max(7000, ((vid.duration || 12) * 1000));
+      var delai = 6000;
+      if (vid && dias[cur].contains(vid)) delai = Math.max(6000, ((vid.duration || 12) * 1000));
       minuteur = setTimeout(function() { aller(cur + 1); relancer(); }, delai);
     }
     document.getElementById('car-prec').addEventListener('click', function() { aller(cur - 1); relancer(); });
