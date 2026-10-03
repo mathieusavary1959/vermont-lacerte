@@ -84,15 +84,15 @@
     position: absolute; right: -24px; top: 46%; transform: translateY(-50%);
     width: min(520px, 58vw); opacity: .17; pointer-events: none;
   }
-  .hero .contenu { position: relative; max-width: 1200px; margin: 0 auto; padding: 88px 18px 118px; }
+  .hero .contenu { position: relative; max-width: 1240px; margin: 0 auto; padding: 112px 18px 140px; }
   .kicker {
-    display: inline-block; font-weight: 800; letter-spacing: 2.5px; font-size: .78rem;
+    display: inline-block; font-weight: 800; letter-spacing: 2.5px; font-size: .92rem;
     color: #14301F; background: linear-gradient(90deg, #FFD34D, var(--or));
-    padding: 6px 14px; border-radius: 4px; transform: skewX(-8deg);
+    padding: 8px 18px; border-radius: 4px; transform: skewX(-8deg);
     box-shadow: 0 8px 20px -8px rgba(255,199,44,.8);
     animation: entree .6s ease both;
   }
-  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 11vw, 8.6rem); line-height: .92; letter-spacing: 3px; margin-top: 18px; text-shadow: 0 12px 44px rgba(0,0,0,.6); animation: entree .6s .08s ease both; }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.8rem, 13vw, 11rem); line-height: .92; letter-spacing: 3px; margin-top: 22px; text-shadow: 0 12px 44px rgba(0,0,0,.6); animation: entree .6s .08s ease both; }
   h1 span {
     background: linear-gradient(100deg, #B8860B 0%, var(--or) 35%, #FFF3C4 50%, var(--or) 65%, #B8860B 100%);
     background-size: 220% 100%;
@@ -100,12 +100,12 @@
     animation: brillance 5s linear infinite;
   }
   @keyframes brillance { from { background-position: 200% 0; } to { background-position: -20% 0; } }
-  .hero p.accroche { max-width: 640px; margin-top: 16px; font-size: 1.16rem; font-weight: 500; animation: entree .6s .16s ease both; }
-  .puces-hero { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; animation: entree .6s .22s ease both; }
+  .hero p.accroche { max-width: 780px; margin-top: 20px; font-size: 1.34rem; font-weight: 500; animation: entree .6s .16s ease both; }
+  .puces-hero { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; animation: entree .6s .22s ease both; }
   .puce-hero {
     background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.25);
-    backdrop-filter: blur(4px); border-radius: 999px; padding: 6px 14px;
-    font-size: .83rem; font-weight: 700; letter-spacing: .6px;
+    backdrop-filter: blur(4px); border-radius: 999px; padding: 8px 18px;
+    font-size: .98rem; font-weight: 700; letter-spacing: .6px;
   }
   .puce-hero b { color: var(--or); font-weight: 800; }
   .hero .actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; animation: entree .6s .3s ease both; }
@@ -429,7 +429,7 @@
   .sb-note { display: block; margin-top: 8px; font-size: .8rem; font-weight: 500; color: var(--vert-clair); }
 
   /* ===== Carrousel du haut ===== */
-  .hero { min-height: 600px; }
+  .hero { min-height: clamp(660px, 88vh, 880px); }
   .dia { position: absolute; inset: 0; opacity: 0; transition: opacity .7s ease; pointer-events: none; }
   .dia.actif { opacity: 1; pointer-events: auto; }
   .car-fleche {
@@ -449,9 +449,9 @@
   }
   .car-point.actif { background: var(--or); }
   .dia-logos { display: flex; align-items: center; gap: 18px; margin-top: 18px; }
-  .dia-titre { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 5.8rem); line-height: .95; letter-spacing: 2.5px; margin-top: 16px; }
+  .dia-titre { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.4rem, 9vw, 7rem); line-height: .95; letter-spacing: 2.5px; margin-top: 16px; }
   .dia-titre span { color: var(--or); }
-  @media (max-width: 900px) { .hero { min-height: 540px; } }
+  @media (max-width: 900px) { .hero { min-height: 620px; } }
   .dia-logos img { width: 76px; height: 76px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(0,0,0,.55)); }
   .dia-logos .vs { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--or); }
   .fond-lacerte { filter: brightness(.45) saturate(1.1); }
@@ -464,8 +464,8 @@
     filter: drop-shadow(0 4px 14px rgba(0,0,0,.35));
   }
   .griffe-hero {
-    position: absolute; top: 30px; right: 2.5%; width: 430px; height: 394px;
-    color: #FFFFFF; opacity: .22; transform: rotate(-12deg);
+    position: absolute; top: 24px; left: 2%; right: auto; width: 430px; height: 394px;
+    color: #FFFFFF; opacity: .22; transform: rotate(14deg) scaleX(-1);
     pointer-events: none; z-index: 1;
   }
   .griffe-bg.gauche { right: auto; left: 2%; transform: rotate(10deg) scaleX(-1); }
