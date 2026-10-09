@@ -341,6 +341,7 @@
   .modale h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; letter-spacing: 1px; line-height: 1; }
   .modale .m-pos { color: var(--or); font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; font-size: .85rem; margin-top: 4px; }
   .modale .m-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 24px; margin-top: 20px; }
+  .modale .champ.stat-titre { grid-column: 1 / -1; font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 1px; color: var(--or); margin-top: 10px; padding-top: 16px; border-top: 1px solid rgba(255,199,44,.3); }
   .modale .m-note { margin-top: 18px; padding: 14px 16px; background: rgba(255,199,44,.08); border-left: 4px solid var(--or); border-radius: 0 10px 10px 0; font-weight: 500; }
   .modale .m-actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
   .fermer {
@@ -1321,6 +1322,24 @@
     champ("Naissance", j.ne ? "en " + j.ne : null);
     champ("Origine", j.ville);
     champ("Équipe", "Catamounts du Vermont (NCAA)");
+    function champStat(e, v) { if (v === undefined || v === null) return; lignes.push("<div class='champ'><div class='etiquette'>" + e + "</div><div class='valeur'>" + v + "</div></div>"); }
+    if (j.s) {
+      lignes.push("<div class='champ stat-titre'>Saison régulière 2026-2027</div>");
+      if (j.g === "Gardiens") {
+        champStat("Matchs joués", j.s.pj);
+        champStat("Victoires", j.s.v);
+        champStat("Défaites", j.s.d);
+        champStat("Arrêts", j.s.arr);
+        champStat("Moyenne", j.s.moy);
+        champStat("% d'arrêts", j.s.pct);
+      } else {
+        champStat("Matchs joués", j.s.pj);
+        champStat("Buts", j.s.b);
+        champStat("Aides", j.s.a);
+        champStat("Points", j.s.pts);
+        champStat("Punitions (min)", j.s.pun);
+      }
+    }
     document.getElementById("m-grille").innerHTML = lignes.join("");
     var noteEl = document.getElementById("m-note");
     if (j.note) { noteEl.style.display = "block"; noteEl.textContent = j.note; }
