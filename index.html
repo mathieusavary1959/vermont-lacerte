@@ -370,6 +370,29 @@
 
   /* ===== Club, histoire, suivi ===== */
   .club-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.direct-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 18px; }
+.direct-carte { padding: 26px 28px; }
+.direct-sur { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #FFD34D; font-weight: 700; }
+.direct-carte h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: .5px; color: #FFFFFF; margin: 8px 0 10px; }
+.direct-texte { color: #F4F4F4; opacity: .85; line-height: 1.5; margin-bottom: 16px; }
+.direct-lecteur { border-radius: 14px; border: 1px solid rgba(255,199,44,.35); background: linear-gradient(135deg, #0B2B20, #061A13); padding: 20px; }
+.radio-ligne { display: flex; align-items: center; gap: 18px; }
+.btn-lecture { flex: none; width: 76px; height: 76px; border-radius: 50%; border: none; cursor: pointer; background: var(--or); color: #0B2B20; display: flex; align-items: center; justify-content: center; transition: transform .15s ease, box-shadow .15s ease; box-shadow: 0 8px 24px -6px rgba(255,199,44,.6); }
+.btn-lecture:hover { transform: scale(1.06); box-shadow: 0 10px 28px -6px rgba(255,199,44,.8); }
+.btn-lecture svg { width: 30px; height: 30px; }
+.radio-infos { flex: 1; min-width: 0; }
+.badge-direct { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: 2px; color: #FF6B6B; text-transform: uppercase; }
+.badge-direct .point { width: 10px; height: 10px; border-radius: 50%; background: #FF3B30; animation: pulse-direct 1.6s ease-in-out infinite; }
+@keyframes pulse-direct { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.8); } }
+.radio-station { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: var(--blanc); margin: 4px 0 2px; }
+.radio-etat { font-size: 13px; color: var(--vert-clair); font-weight: 600; }
+.radio-volume { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.radio-volume label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; opacity: .6; font-weight: 700; }
+.radio-volume input[type=range] { flex: 1; accent-color: var(--or); cursor: pointer; }
+.radio-erreur { display: none; margin-top: 12px; font-size: 13px; }
+.radio-erreur a { color: var(--or); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .badge-direct .point { animation: none; } }
+.direct-note { margin-top: 12px; font-size: 13px; opacity: .55; }
   .club-carte { padding: 26px; }
   .club-carte h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.2px; font-size: 1.35rem; color: var(--or); margin-bottom: 8px; }
   .club-carte p { font-weight: 500; }
@@ -401,7 +424,7 @@
   footer p + p { margin-top: 8px; }
 
   @media (max-width: 900px) {
-    .joueur, .club-grille, .legendes { grid-template-columns: 1fr; }
+    .joueur, .club-grille, .legendes, .direct-grille { grid-template-columns: 1fr; }
     .chiffres { grid-template-columns: repeat(2, 1fr); }
     .releve, .suivi, .liens { grid-template-columns: 1fr; }
     .mc-haut { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 16px; }
@@ -532,6 +555,7 @@
       <a href="#club">Le club</a>
       <a href="#guide">Guide Burlington</a>
       <a href="#horaire">Horaire</a>
+      <a href="#endirect">En direct</a>
       <a href="#videos">Vidéos</a>
     </nav>
   </div>
@@ -975,8 +999,46 @@
   </div>
 </section>
 
+<section id="endirect">
+  <div class="kick r">10 · En direct</div>
+  <h2 class="r">Le match en direct</h2>
+  <p class="sous-titre r">Écoute la radio des Catamounts et suis la transcription écrite du match en direct</p>
+  <div class="direct-grille">
+    <div class="carte r direct-carte">
+      <div class="direct-sur">Radio</div>
+      <h3>Écoute le match en direct</h3>
+      <p class="direct-texte">WVMT 96.3 FM / 620 AM, la voix des Catamounts.<br><span id="direct-match">Prochain match : Vermont à Bentley, ven. 9 oct. à 19 h.</span></p>
+      <div class="direct-lecteur">
+        <div class="radio-ligne">
+          <button id="btn-lecture" class="btn-lecture" aria-label="Écouter la radio WVMT en direct">
+            <svg id="icone-lecture" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="radio-infos">
+            <span class="badge-direct"><span class="point"></span>En direct</span>
+            <div class="radio-station">WVMT · La voix des Catamounts</div>
+            <div class="radio-etat" id="radio-etat">Clique sur lecture pour écouter le match.</div>
+          </div>
+        </div>
+        <div class="radio-volume">
+          <label for="radio-volume">Volume</label>
+          <input type="range" id="radio-volume" min="0" max="100" value="80" aria-label="Volume de la radio">
+        </div>
+        <p class="radio-erreur" id="radio-erreur">La lecture ne démarre pas? <a href="https://tunein.com/embed/player/s23568/" target="_blank" rel="noopener">Ouvre le lecteur TuneIn</a>.</p>
+      </div>
+      <audio id="audio-wvmt" src="https://live.amperwave.net/direct/vox-wvmtammp3-ibc" preload="none"></audio>
+      <p class="direct-note">Diffusion gratuite, offerte par la station WVMT.</p>
+    </div>
+    <div class="carte r direct-carte">
+      <div class="direct-sur">Suivi écrit</div>
+      <h3>La transcription du match en direct</h3>
+      <p class="direct-texte">Le récit écrit de la partie, mis à jour en temps réel : pointage, buts, punitions et fiche des joueurs.</p>
+      <a id="btn-stats" class="btn btn-or" href="https://uvmathletics.com/sidearmstats/mhockey/summary" target="_blank" rel="noopener">Suivre le match en direct</a>
+      <p class="direct-note">Le lien est mis à jour automatiquement avant chaque match.</p>
+    </div>
+  </div>
+</section>
 <section id="horaire">
-  <div class="kick r">10 · Horaire</div>
+  <div class="kick r">11 · Horaire</div>
   <h2 class="r">Saison 2026-2027</h2>
   <p class="sous-titre r">Dates à retenir pour suivre les débuts de Félix</p>
   <div class="carte tableau r">
@@ -1003,7 +1065,7 @@
 </section>
 
 <section id="videos">
-  <div class="kick r">11 · Vidéos</div>
+  <div class="kick r">12 · Vidéos</div>
   <h2 class="r">À regarder</h2>
   <p class="sous-titre r">Les Catamounts en images, directement du compte officiel</p>
   <div class="reels-grille">
@@ -1379,6 +1441,53 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('.compte').forEach(function(el) { obsC.observe(el); });
   }
+</script>
+<script>
+(function(){
+  try{
+    fetch('https://vermont-lacerte-live.netlify.app/live.json',{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(d){
+        if(d && d.stats_url){
+          var b=document.getElementById('btn-stats');
+          if(b) b.href=d.stats_url;
+        }
+        if(d && d.match){
+          var m=document.getElementById('direct-match');
+          if(m) m.textContent='Match : '+d.match+'.';
+        }
+      })
+      .catch(function(){});
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  var audio=document.getElementById('audio-wvmt');
+  var btn=document.getElementById('btn-lecture');
+  var icone=document.getElementById('icone-lecture');
+  var etat=document.getElementById('radio-etat');
+  var volume=document.getElementById('radio-volume');
+  var erreur=document.getElementById('radio-erreur');
+  if(!audio||!btn) return;
+  var SVG_LECTURE='<path d="M8 5v14l11-7z"/>';
+  var SVG_PAUSE='<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+  audio.volume=0.8;
+  function majIcone(){ icone.innerHTML = audio.paused ? SVG_LECTURE : SVG_PAUSE; }
+  btn.addEventListener('click', function(){
+    erreur.style.display='none';
+    if(audio.paused){
+      var p=audio.play();
+      if(p && p.catch){ p.catch(function(){ etat.textContent='La lecture a été bloquée. Réessaie.'; }); }
+    } else { audio.pause(); }
+  });
+  audio.addEventListener('playing', function(){ majIcone(); etat.textContent='En écoute : WVMT en direct.'; });
+  audio.addEventListener('pause', function(){ majIcone(); etat.textContent='En pause. Clique sur lecture pour reprendre.'; });
+  audio.addEventListener('waiting', function(){ etat.textContent='Connexion à la station...'; });
+  audio.addEventListener('error', function(){ majIcone(); etat.textContent='Impossible de joindre la station pour le moment.'; erreur.style.display='block'; });
+  volume.addEventListener('input', function(){ audio.volume=volume.value/100; });
+  majIcone();
+})();
 </script>
 </body>
 </html>
